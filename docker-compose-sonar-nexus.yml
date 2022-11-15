@@ -1,7 +1,7 @@
 version: "3"
 services:
   sonarqube:
-    image: sonarqube:lts-community
+    image: sonarqube:8.9.7-community
     container_name: sonarqube
     restart: always
     environment:
