@@ -40,21 +40,22 @@ pipeline {
              }
         }
 
-        /*
+        
         stage('Mvn SonarQube') {
             steps {
-            	sh """ mvn sonar:sonar -Dsonar.projectKey=springboot-devops -Dsonar.host.url=http://192.168.1.17:9000 -Dsonar.login="eba03a61a8ad621f33f6f8c06687de49aa493e4d" """;
+            	sh """ mvn sonar:sonar -Dsonar.projectKey=springboot-devops -Dsonar.host.url=http://192.168.1.17:9000 -Dsonar.login="fb8367ec875e9b7a808667884843110d6f0c2f78" """;
             }
         }
 
+        
         stage('Nexus Script') {
             steps {
                 script {
-                	sh """ mvn deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.56.4:8081/repository/springboot-devops/ -Dfile=target/tpAchatProject-1.0.jar """
+                	sh """ mvn deploy:deploy-file -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.1.17:8081/repository/springboot-pipeline/ -Dfile=target/tpAchatProject-1.0.jar """
                 }
             }
         }
-
+        
         stage('Clean install') {
              steps {
                 sh 'mvn clean package -DskipTests'
@@ -63,16 +64,16 @@ pipeline {
 
         stage('Docker build Image') {
             steps {
-                sh 'docker build -t mahdibehi/springboot-devops:jenkins .'
+                sh 'docker build -t kaiswch/springboot-pipeline .'
             }
         }
 
         
         stage('Docker push to Dockerhub') {
             steps {
-                sh """ docker login -u mahdibehi -p dckr_pat_UoNF-WMddLEf6c9U8wG_AIisy44 """
+                sh """ docker login -u kaiswch -p dckr_pat_c-YI66AiVg-Tq2KksBZWqezaOyg """
                 sh """ cat ~/.docker/config.json """
-                sh """ docker push mahdibehi/springboot-devops:jenkins """
+                sh """ docker push kaiswch/springboot-pipeline """
             }
         }
         
