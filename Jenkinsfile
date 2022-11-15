@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     tools {
-      maven 'MAVEN_HOME'
+      maven 'M2_HOME'
       jdk 'JAVA_HOME'
     }
     stages {
 
         stage('Clone Repo GIT') {
             steps {
-                git branch: 'mahdi',
-                url : 'https://github.com/Symbiose-esprit/SpringBoot.git';
+                git branch: 'main',
+                url : 'https://github.com/ons-ou/springboot-pipeline';
             }
         }
 
@@ -36,7 +36,7 @@ pipeline {
 
         stage('Docker Compose Sonexus') {
              steps {
-                sh 'docker-compose -f docker-compose-sonexus.yml up -d'
+                sh 'docker-compose -f docker-compose-sonar-nexus.yml up -d'
              }
         }
 
@@ -85,7 +85,7 @@ pipeline {
     }
     post {
         always {
-             echo 'This will always run'
+             echo 'Pipeline finished'
          }
     }
 }
