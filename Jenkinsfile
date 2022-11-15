@@ -68,14 +68,14 @@ pipeline {
             }
         }
 
-        
+        /*
         stage('Docker push to Dockerhub') {
             steps {
                 sh """ docker login -u kaiswch -p dckr_pat_c-YI66AiVg-Tq2KksBZWqezaOyg """
                 sh """ cat ~/.docker/config.json """
                 sh """ docker push kaiswch/springboot-pipeline """
             }
-        }
+        }*/
         
 
         stage('Docker compose up') {
