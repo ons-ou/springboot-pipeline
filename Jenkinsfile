@@ -34,15 +34,16 @@ pipeline {
             }
         }
 
-        stage('Docker Compose Sonexus') {
+        stage('Docker Compose Sonar Nexus') {
              steps {
                 sh 'docker-compose -f docker-compose-sonar-nexus.yml up -d'
              }
         }
 
+        /*
         stage('Mvn SonarQube') {
             steps {
-            	sh """ mvn sonar:sonar -Dsonar.projectKey=springboot-devops -Dsonar.host.url=http://192.168.56.4:9000 -Dsonar.login="eba03a61a8ad621f33f6f8c06687de49aa493e4d" """;
+            	sh """ mvn sonar:sonar -Dsonar.projectKey=springboot-devops -Dsonar.host.url=http://192.168.1.17:9000 -Dsonar.login="eba03a61a8ad621f33f6f8c06687de49aa493e4d" """;
             }
         }
 
@@ -66,7 +67,7 @@ pipeline {
             }
         }
 
-        /*
+        
         stage('Docker push to Dockerhub') {
             steps {
                 sh """ docker login -u mahdibehi -p dckr_pat_UoNF-WMddLEf6c9U8wG_AIisy44 """
@@ -74,13 +75,14 @@ pipeline {
                 sh """ docker push mahdibehi/springboot-devops:jenkins """
             }
         }
-        */
+        
 
         stage('Docker compose up') {
              steps {
                 sh 'docker-compose up -d'
              }
         }
+        */
         
     }
     post {
